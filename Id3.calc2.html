@@ -1,0 +1,138 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="id3.calc1.css">
+		<script>
+			
+			function Key (a) {
+			  if (document.getElementById('inputID1').innerHTML == 0) {
+			    document.getElementById('inputID1').innerHTML=a
+			  }
+			  else {
+			    document.getElementById('inputID1').innerHTML+=a
+			  }
+		    }
+		    function znak (a) {
+			  let s = document.getElementById('inputID1').innerHTML;
+			  x = s [s.length - 1]
+			  if ( x == "*" || x == "/" || x == "+" || x == "-" ) {
+                z = s.replace ( x, a ) ;
+				document.getElementById('inputID1').innerHTML = z
+  		        return z
+			  }
+			a1 = (s.indexOf ("+") > 0);
+			a2 = (s.indexOf ("-") > 0);
+  			a3 = (s.indexOf ("*") > 0);
+			a4 = (s.indexOf ("/") > 0);
+			if ( a1 || a2 || a3 || a4 ) {
+			  ravno ()
+			  return
+			}
+			document.getElementById('inputID1').innerHTML+=a
+			}
+			function tochka (a) {
+			  let s = document.getElementById('inputID1').innerHTML;
+			  let tochkayes = true
+			  for ( let i =0; i < s.length; i = i + 1 ) { 
+			    if ( s[i] == (".") ) {
+				  tochkayes = false
+				}
+				if (s[i] == ("+") || s[i] ==("-") || s[i] ==("*") || s[i] ==("/")) {
+				  tochkayes = true
+				}
+			  }
+			  if ( tochkayes ) {
+			    document.getElementById('inputID1').innerHTML+=a
+			  }
+			}
+			function Clear() {
+			  document.getElementById('inputID1').innerHTML='0'
+			}
+			
+		    function ravno () {
+			  plus ();
+			  umnozh ();
+			  div ();
+			  minus ();
+			  ravnoRovno ()
+			}
+
+			function ravnoRovno () {
+              let w = document.getElementById('inputID1').innerHTML;
+              document.getElementById('inputID1').innerHTML  = w. slice ( 0 , 11 )
+			}
+
+			function plus (a) {
+			  let s = document.getElementById('inputID1').innerHTML;
+			  y = s.indexOf ( "+" );
+              if ( y == -1 ) {
+			    return
+              }
+			  num1 = Number (s.slice ( 0, y ));
+			  num2 = Number ( s.slice ( y+1 ));
+			  document.getElementById('inputID1').innerHTML = num1 + num2;
+			}
+
+			function minus (a) {
+			  let s = document.getElementById('inputID1').innerHTML;
+			  y = s.lastIndexOf ( "-" );
+              if ( y == -1 ) {
+			    return
+              }
+			  num1 = Number (s.slice ( 0, y ));
+			  num2 = Number ( s.slice ( y+1 ));
+			  document.getElementById('inputID1').innerHTML = num1 - num2;
+			}
+
+			function umnozh (a) {
+			  let s = document.getElementById('inputID1').innerHTML;
+			  y = s.indexOf ( "*" );
+ 			  if ( y == -1 ) {
+			    return
+              }
+			  num1 = Number (s.slice ( 0, y ));
+			  num2 = Number ( s.slice ( y+1 ));
+			  document.getElementById('inputID1').innerHTML = num1 * num2;
+			}
+
+			function div (a) {
+			  let s = document.getElementById('inputID1').innerHTML;
+			  y = s.indexOf ( "/" );
+ 			  if ( y == -1 ) {
+			  return
+              }
+			  num1 = Number (s.slice ( 0, y ));
+			  num2 = Number ( s.slice ( y+1 ));
+			  document.getElementById('inputID1').innerHTML = num1 / num2;
+			}
+
+		</script>	
+		</head>
+		<body>
+
+<h1>Калькулятор</h1>
+<div class="calc">
+  <div id = 'inputID1' class="calc__output">0</div>
+   <div class="calc__keyss">
+   <button onclick = "Key (1)" class="calc__key">1</button>
+   <button onclick = "Key (2)" class="calc__key">2</button>
+   <button onclick = "Key (3)" class="calc__key">3</button>
+   <button onclick = "Key (4)" class="calc__key">4</button>
+   <button onclick = "Key (5)" class="calc__key">5</button>
+   <button onclick = "Key (6)" class="calc__key">6</button>
+   <button onclick = "Key (7)" class="calc__key">7</button>
+   <button onclick = "Key (8)" class="calc__key">8</button>
+   <button onclick = "Key (9)" class="calc__key">9</button>
+   <button onclick = "Key (0)" class="calc__key">0</button>
+   <button onclick = "tochka ('.')" class="calc__key">.</button>
+   <button onclick = "Clear ('c')" class="calc__key">c</button>
+   </div>
+   <div class="calc__keys">
+   <button onclick = "znak ('+')" class="calc__key calc__key--operator">+</button>
+   <button onclick = "znak ('-')" class="calc__key calc__key--operator">-</button>
+   <button onclick = "znak ('*')" class="calc__key calc__key--operator">*</button>
+   <button onclick = "znak ('/')" class="calc__key calc__key--operator">÷</button>
+   <button onclick = "ravno ('=')" class="calc__key calc__key--enter">=</button>
+   </div>
+ </div>
+</body>
+</html>
